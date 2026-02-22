@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "ニコニコ クリップDL",
+  "version": "1.0.0",
+  "description": "ニコニコ動画の指定区間をMP4でダウンロード",
+  "permissions": [
+    "downloads",
+    "storage",
+    "tabs",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "*://*.nicovideo.jp/*",
+    "*://*.domand.nicovideo.jp/*",
+    "*://*.nimg.jp/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://www.nicovideo.jp/watch/*"],
+      "js": [
+        "lib/browser-compat.js",
+        "lib/mp4box.min.js",
+        "lib/hls-parser.js",
+        "content/hls-interceptor.js",
+        "content/overlay-ui.js",
+        "content/downloader.js",
+        "content/content.js"
+      ],
+      "css": ["assets/overlay.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "service_worker": "background/background.js"
+  }
+}

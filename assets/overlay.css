@@ -1,0 +1,274 @@
+/* overlay.css - ニコニコ クリップDL */
+
+/* ─── コントロールバー挿入ボタン ─────────────────────────────────────────── */
+
+#ncd-clip-btn {
+  /* コメントボタンと同じ見た目になるよう、スタイルは最小限 */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  /* ニコニコの既存ボタンスタイルをできるだけ引き継ぐ */
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  /* 独自の視覚フィードバック */
+  opacity: 0.85;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+#ncd-clip-btn:hover {
+  opacity: 1;
+}
+
+/* アクティブ状態 (パネルが開いている) */
+#ncd-clip-btn.ncd-active {
+  opacity: 1;
+  background: rgba(59, 143, 212, 0.25) !important;
+  border-radius: 4px;
+}
+
+/* ─── フローティングパネル ────────────────────────────────────────────────── */
+
+#ncd-panel {
+  position: fixed;
+  /* プレイヤーコントロールバーのすぐ上に表示 */
+  bottom: 60px;
+  right: 16px;
+  z-index: 2147483647; /* 最大z-index */
+  width: 300px;
+  background: rgba(18, 18, 18, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #e8e8e8;
+  font-family: -apple-system, 'Helvetica Neue', sans-serif;
+  font-size: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+  display: none; /* 初期非表示 */
+  flex-direction: column;
+  user-select: none;
+}
+
+/* ヘッダー */
+#ncd-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-weight: 600;
+  font-size: 12px;
+  color: #bbb;
+}
+
+#ncd-panel-close {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 14px;
+  line-height: 1;
+  padding: 2px 4px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+#ncd-panel-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+/* ボディ */
+#ncd-panel-body {
+  padding: 10px 10px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ステータスメッセージ */
+#ncd-status-msg {
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+  padding: 2px 0;
+}
+
+/* シークバー */
+#ncd-seekbar-container {
+  padding: 4px 0;
+}
+
+#ncd-seekbar {
+  position: relative;
+  height: 6px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 3px;
+  margin: 12px 8px;
+  cursor: pointer;
+}
+
+#ncd-range {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: #3b8fd4;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+#ncd-handle-start,
+#ncd-handle-end {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 2px solid #3b8fd4;
+  border-radius: 50%;
+  cursor: ew-resize;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  z-index: 1;
+}
+#ncd-handle-start:hover,
+#ncd-handle-end:hover {
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+/* 時刻入力行 */
+.ncd-time-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ncd-time-row label {
+  min-width: 26px;
+  font-size: 11px;
+  color: #888;
+}
+
+.ncd-time-row input[type="text"] {
+  width: 66px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  color: #e8e8e8;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 3px 6px;
+  text-align: center;
+}
+.ncd-time-row input[type="text"]:focus {
+  outline: none;
+  border-color: #3b8fd4;
+}
+
+.ncd-pos-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 3px;
+  color: #bbb;
+  font-size: 10px;
+  padding: 3px 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ncd-pos-btn:hover { background: rgba(255,255,255,0.16); color: #fff; }
+
+/* クリップ長ラベル */
+#ncd-duration-label {
+  font-size: 11px;
+  color: #777;
+  text-align: center;
+}
+
+/* エラーメッセージ */
+#ncd-error-msg {
+  display: none;
+  font-size: 11px;
+  color: #f66;
+  background: rgba(255,80,80,0.1);
+  border-radius: 3px;
+  padding: 4px 6px;
+  word-break: break-all;
+}
+
+/* フッター */
+#ncd-panel-footer {
+  padding: 6px 10px 10px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ダウンロードボタン */
+#ncd-download-btn {
+  width: 100%;
+  padding: 7px 0;
+  background: #3b8fd4;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+#ncd-download-btn:hover:not(:disabled) { background: #2a80c8; }
+#ncd-download-btn:disabled {
+  background: rgba(59,143,212,0.3);
+  color: #777;
+  cursor: not-allowed;
+}
+
+/* ダウンロード中 */
+#ncd-download-btn.ncd-downloading {
+  background: #d4820a;
+  color: #fff;
+  cursor: not-allowed;
+  animation: ncd-btn-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes ncd-btn-pulse {
+  0%, 100% { background: #d4820a; }
+  50%       { background: #f0950c; }
+}
+
+/* 進捗バー */
+#ncd-progress-wrap {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+#ncd-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#ncd-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b8fd4, #5ab5f4);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.3s ease;
+  animation: ncd-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ncd-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+#ncd-progress-label {
+  font-size: 11px;
+  color: #888;
+  min-width: 28px;
+  text-align: right;
+}

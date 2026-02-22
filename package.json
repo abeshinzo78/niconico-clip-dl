@@ -1,0 +1,25 @@
+{
+  "name": "niconico-clip-dl",
+  "version": "1.0.0",
+  "description": "ニコニコ動画の指定区間をMP4でダウンロードするFirefox拡張機能",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFiles": ["./tests/setup/browser-mock.js"],
+    "testMatch": ["**/tests/**/*.test.js"],
+    "collectCoverageFrom": [
+      "lib/**/*.js",
+      "content/**/*.js",
+      "background/**/*.js",
+      "!lib/mp4box.min.js"
+    ]
+  }
+}
