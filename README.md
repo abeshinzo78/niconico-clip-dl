@@ -12,7 +12,7 @@ Firefox・Chrome の両ブラウザに対応。
 
 1. このページ右側の **[Releases](../../releases)** を開く
 2. 最新バージョンのアセットから使用するブラウザのZIPをダウンロード:
-   - `niconico-clip-dl-firefox.zip` — Firefox用
+   - `niconico-clip-dl-firefox.xpi` — Firefox用
    - `niconico-clip-dl-chrome.zip` — Chrome用
 
 ---
@@ -25,16 +25,7 @@ Firefox・Chrome の両ブラウザに対応。
 2. `xpinstall.signatures.required` を検索して **false** に変更
 3. `about:addons` を開く
 4. 歯車アイコン →「ファイルからアドオンをインストール」
-5. ダウンロードした `niconico-clip-dl-firefox.zip` を選択
-
-#### 方法B: 一時的なインストール（開発者向け・Firefox再起動で消える）
-
-1. Firefox のアドレスバーに `about:debugging` と入力
-2. 「この Firefox」をクリック
-3. 「一時的な拡張機能を読み込む」をクリック
-4. ダウンロードした ZIP を展開し、中の `manifest.json` を選択
-
----
+5. ダウンロードした `niconico-clip-dl-firefox.xpi` を選択
 
 ### Chrome へのインストール
 
