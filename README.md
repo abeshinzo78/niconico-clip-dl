@@ -19,13 +19,7 @@ Firefox・Chrome の両ブラウザに対応。
 
 ### Firefox へのインストール
 
-#### 方法A: 永続インストール（署名なし拡張を許可する場合）
-
-1. Firefox のアドレスバーに `about:config` と入力
-2. `xpinstall.signatures.required` を検索して **false** に変更
-3. `about:addons` を開く
-4. 歯車アイコン →「ファイルからアドオンをインストール」
-5. ダウンロードした `niconico-clip-dl-firefox.xpi` を選択
+1. Releasesからniconico-clip-dl-firefox.xpiを選んでアドオンのインストールを許可すればインストールされます。
 
 ### Chrome へのインストール
 
