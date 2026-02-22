@@ -1,8 +1,64 @@
 # ニコニコ クリップDL
 
-ニコニコ動画の視聴ページで、動画の任意の時間範囲を **MP4** としてダウンロードできるブラウザ拡張機能。
+ニコニコ動画の視聴ページで、動画の**任意の時間範囲をMP4でダウンロード**できるブラウザ拡張機能。
 
 Firefox・Chrome の両ブラウザに対応。
+
+---
+
+## ダウンロード・インストール
+
+### ZIPをダウンロードする（ビルド不要・簡単）
+
+1. このページ右側の **[Releases](../../releases)** を開く
+2. 最新バージョンのアセットから使用するブラウザのZIPをダウンロード:
+   - `niconico-clip-dl-firefox.zip` — Firefox用
+   - `niconico-clip-dl-chrome.zip` — Chrome用
+
+---
+
+### Firefox へのインストール
+
+#### 方法A: 永続インストール（署名なし拡張を許可する場合）
+
+1. Firefox のアドレスバーに `about:config` と入力
+2. `xpinstall.signatures.required` を検索して **false** に変更
+3. `about:addons` を開く
+4. 歯車アイコン →「ファイルからアドオンをインストール」
+5. ダウンロードした `niconico-clip-dl-firefox.zip` を選択
+
+#### 方法B: 一時的なインストール（開発者向け・Firefox再起動で消える）
+
+1. Firefox のアドレスバーに `about:debugging` と入力
+2. 「この Firefox」をクリック
+3. 「一時的な拡張機能を読み込む」をクリック
+4. ダウンロードした ZIP を展開し、中の `manifest.json` を選択
+
+---
+
+### Chrome へのインストール
+
+> Chrome は署名なし拡張をデベロッパーモードでのみ読み込めます。
+
+1. ダウンロードした `niconico-clip-dl-chrome.zip` を右クリック →「すべて展開」で任意のフォルダに展開
+2. Chrome のアドレスバーに `chrome://extensions` と入力
+3. 右上の「デベロッパーモード」をオンにする
+4. 「パッケージ化されていない拡張機能を読み込む」をクリック
+5. 手順1で展開したフォルダを選択
+
+---
+
+## 使い方
+
+1. ニコニコ動画の動画ページ（`nicovideo.jp/watch/smXXXXX`）を開く
+2. 動画プレイヤー付近に **「✂ クリップ」** ボタンが表示される
+3. クリックしてパネルを開く
+4. 開始・終了時間をドラッグまたは数値入力で指定
+5. **「MP4でダウンロード」** をクリック
+6. ダウンロード完了後、以下のファイル名で保存される:
+   ```
+   ニコニコ_smXXXXX_クリップ_00:00-01:30.mp4
+   ```
 
 ---
 
@@ -10,69 +66,56 @@ Firefox・Chrome の両ブラウザに対応。
 
 - 動画プレイヤー上にオーバーレイUIを表示
 - 開始・終了時間をドラッグまたは数値入力で指定
-- AES-128-CBC 復号 + fMP4バイナリマージ（再エンコードなし）
-- 指定区間を MP4 形式でダウンロード
+- 「▶ 現在位置」ボタンで再生中の位置を即座に反映
+- AES-128-CBC 復号 + fMP4バイナリマージ（**再エンコードなし**・高速）
+- セッション有効期限の監視と警告表示
 
 ---
 
-## インストール方法
+## ソースからビルドする（開発者向け）
 
-### ビルド
+### 必要なもの
 
-PowerShell から以下を実行して ZIP を生成:
+- PowerShell（Windows標準）
+- Node.js（テスト実行用）
+
+### 手順
 
 ```powershell
+# リポジトリをクローン
+git clone https://github.com/abeshinzo78/niconico-clip-dl.git
+cd niconico-clip-dl
+
+# ZIPを生成
 .\build.ps1
 ```
 
 - `niconico-clip-dl-firefox.zip` — Firefox用
-- `niconico-clip-dl-chrome.zip` — Chrome用（展開して使用）
+- `niconico-clip-dl-chrome.zip` — Chrome用
 
----
+### テスト
 
-### Firefox（永続インストール）
-
-1. `build.ps1` を実行して `niconico-clip-dl-firefox.zip` を生成
-2. Firefox で `about:addons` を開く
-3. 歯車アイコン →「ファイルからアドオンをインストール」→ ZIP ファイルを選択
-
-> 一時的なインストール: `about:debugging` →「この Firefox」→「一時的な拡張機能を読み込む」→ ZIP 内の `manifest.json` を選択
-
----
-
-### Chrome
-
-1. `build.ps1` を実行して `niconico-clip-dl-chrome.zip` を生成し展開
-2. Chrome で `chrome://extensions` を開く
-3. 「デベロッパーモード」をオン
-4. 「パッケージ化されていない拡張機能を読み込む」→ 展開したフォルダを選択
-
----
-
-## 使い方
-
-1. ニコニコ動画の動画ページ (`nicovideo.jp/watch/smXXXXX`) を開く
-2. プレイヤー右下付近に「✂ クリップ」ボタンが表示される
-3. クリックでパネルを開き、開始・終了時間を設定
-4. 「MP4でダウンロード」をクリック
-5. ダウンロードが完了すると `ニコニコ_smXXXXX_クリップ_MM:SS-MM:SS.mp4` が保存される
+```powershell
+npm install
+npm test
+```
 
 ---
 
 ## ファイル構成
 
 ```
-niconico-kirinuki/
+niconico-clip-dl/
 ├── manifest.json          # Firefox (Manifest V2)
 ├── background/
 │   └── background.js      # Firefox バックグラウンドスクリプト
 ├── content/
-│   ├── hls-interceptor.js # XHR/fetch フック
+│   ├── hls-interceptor.js # XHR/fetch フックでHLS情報を取得
 │   ├── overlay-ui.js      # オーバーレイUI
-│   ├── downloader.js      # セグメント取得・復号・Mux
+│   ├── downloader.js      # セグメント取得・AES復号・MP4結合
 │   └── content.js         # エントリーポイント
 ├── lib/
-│   ├── browser-compat.js  # Chrome互換シム
+│   ├── browser-compat.js  # Chrome互換シム (browser → chrome)
 │   ├── mp4box.min.js      # fMP4ライブラリ
 │   └── hls-parser.js      # M3U8パーサー
 ├── assets/
@@ -81,8 +124,7 @@ niconico-kirinuki/
 │   ├── manifest.json      # Chrome (Manifest V3)
 │   └── background.js      # Chrome サービスワーカー
 ├── tests/                 # 自動テスト (Jest)
-├── build.ps1              # ビルドスクリプト
-└── README.md
+└── build.ps1              # ビルドスクリプト
 ```
 
 ---
@@ -97,11 +139,3 @@ niconico-kirinuki/
 | セグメント形式 | fMP4 (.cmfv / .cmfa) |
 | 対象画質 | 360p (video-h264-360p-lowest + audio-aac-128kbps) |
 | 出力形式 | MP4 |
-
----
-
-## テスト
-
-```bash
-npm test
-```
