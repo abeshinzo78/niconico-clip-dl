@@ -61,15 +61,16 @@ function formatTime(ms) {
 
 /**
  * ダウンロードファイル名を生成する
- * 形式: ニコニコ_{videoId}_クリップ_{MM:SS}-{MM:SS}.mp4
+ * 形式: {title}_{videoId}_クリップ_{MM:SS}-{MM:SS}.mp4
  *
+ * @param {string} title  - 動画タイトル（サニタイズ済み）
  * @param {string} videoId
  * @param {number} startMs
  * @param {number} endMs
  * @returns {string}
  */
-function buildFilename(videoId, startMs, endMs) {
-  return `ニコニコ_${videoId}_クリップ_${formatTime(startMs)}-${formatTime(endMs)}.mp4`;
+function buildFilename(title, videoId, startMs, endMs) {
+  return `${title}_${videoId}_クリップ_${formatTime(startMs)}-${formatTime(endMs)}.mp4`;
 }
 
 /**
@@ -551,6 +552,17 @@ function getVideoId() {
 }
 
 /**
+ * ページタイトルから動画タイトルを取得する
+ * document.title は "タイトル - ニコニコ動画" の形式のためサフィックスを除去する
+ * ファイル名として無効な文字 (\ / : * ? " < > |) はアンダースコアに置換する
+ * @returns {string}
+ */
+function getVideoTitle() {
+  const raw = document.title.replace(/\s*[-–—]\s*ニコニコ動画\s*$/, '').trim();
+  return raw.replace(/[\\/:*?"<>|]/g, '_') || 'ニコニコ';
+}
+
+/**
  * メインダウンロード関数
  * @param {number} startMs - 開始時刻 (ms)
  * @param {number} endMs   - 終了時刻 (ms)
@@ -663,7 +675,8 @@ async function startDownload(startMs, endMs) {
     const blobUrl = URL.createObjectURL(videoBlob);
 
     const videoId = getVideoId();
-    const filename = buildFilename(videoId, startMs, endMs);
+    const title = getVideoTitle();
+    const filename = buildFilename(title, videoId, startMs, endMs);
 
     // コンテンツスクリプト内で直接ダウンロード実行
     // (blob URLはnicovideo.jpオリジンに紐づくためbackground.jsからはアクセス不可)
@@ -701,5 +714,6 @@ if (typeof module !== 'undefined' && module.exports) {
     resolveUrl,
     extractMediaUrls,
     fetchAndParseHLSTimeline,
+    getVideoTitle,
   };
 }
