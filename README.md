@@ -1,6 +1,6 @@
 # ニコニコ クリップDL
 
-[まじめな解説読みたい人はここから](https://github.com/abeshinzo78/niconico-clip-dl/edit/main/README.md#%E7%9C%9F%E9%9D%A2%E7%9B%AE%E3%81%AA%E8%A7%A3%E8%AA%AC)
+[まじめな解説読みたい人はここから](https://github.com/abeshinzo78/niconico-clip-dl/README.md#%E7%9C%9F%E9%9D%A2%E7%9B%AE%E3%81%AA%E8%A7%A3%E8%AA%AC)
  
  ＼ﾃﾚﾚﾚｯﾃﾚｰ／
 
