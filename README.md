@@ -171,3 +171,14 @@ niconico-clip-dl/
 | セグメント形式 | fMP4 (.cmfv / .cmfa) |
 | 対象画質 | 360p (video-h264-360p-lowest + audio-aac-128kbps) |
 | 出力形式 | MP4 |
+
+##　説明においてお借りしたもの
+
+【東方手書き】クラウンピースと小さな勇気【声当て】 に出てくるぬえちゃんショッピングの文面
+
+https://www.nicovideo.jp/watch/sm30933316?from=445.95
+
+淫夢家によるインムチャーハン.mp4
+
+https://www.nicovideo.jp/watch/sm45950681
+
