@@ -4,6 +4,8 @@
 
 Firefox・Chrome の両ブラウザに対応。
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/abeshinzo78/niconico-clip-dl)
+
 ---
 
 ## ダウンロード・インストール
