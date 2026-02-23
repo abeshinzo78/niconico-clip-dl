@@ -75,13 +75,22 @@ Firefox・Chrome の両ブラウザに対応。
 
 1. ニコニコ動画の動画ページ（`nicovideo.jp/watch/smXXXXX`）を開く
 2. 動画プレイヤーのコメントオンオフボタンの左に **「✂ クリップ」** ボタンが表示される
-3. クリックしてパネルを開く
-4. 開始・終了時間をドラッグまたは数値入力で指定
-5. **「MP4でダウンロード」** をクリック
-6. ダウンロード完了後、以下のファイル名で保存される:
+ 
+   <img width="1277" height="717" alt="Image" src="https://github.com/user-attachments/assets/9df577a3-b64d-439d-8ff6-7320e19ede4a" />
+   
+
+4. クリックしてパネルを開く
+5. 開始・終了時間をドラッグまたは数値入力で指定
+
+   <img width="370" height="265" alt="Image" src="https://github.com/user-attachments/assets/8c628704-907c-436a-84b3-550726c4c3bf" />
+
+7. **「MP4でダウンロード」** をクリック
+8. ダウンロード完了後、以下のファイル名で保存される:
    ```
    動画タイトル_smXXXXX_クリップ_00_00_01_30.mp4
    ```
+
+<img width="558" height="79" alt="Image" src="https://github.com/user-attachments/assets/a3f8aadd-1fc1-421b-ba2b-8e21a7d5fc6e" />
 
 ---
 
