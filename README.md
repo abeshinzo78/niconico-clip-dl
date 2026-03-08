@@ -40,6 +40,8 @@
 
 Firefox・Chrome の両ブラウザに対応。
 
+また[better-niconico(Chrome版)](https://github.com/kongyo2/better-niconico)　[better-niconico(Firefox版)](https://abeshinzo78/better-niconico-firefox) との併用も可能でおすすめいたします。
+
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/abeshinzo78/niconico-clip-dl)
 
 ---
